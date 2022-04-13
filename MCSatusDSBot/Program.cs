@@ -47,6 +47,7 @@ try
         {
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite("Filename=DataBase.db"));
             services.AddHostedService<InteractionHandler>();
+            services.AddHostedService<ObserversService>();
         }).Build();
 
     await host.RunAsync();

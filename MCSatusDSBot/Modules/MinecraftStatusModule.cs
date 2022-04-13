@@ -2,6 +2,7 @@
 using Discord;
 using Discord.Interactions;
 using Discord.WebSocket;
+using MCSatusDSBot.Extensions;
 using MCSatusDSBot.Old.Models;
 
 namespace MCSatusDSBot.Old.Modules;
@@ -21,9 +22,12 @@ public class MinecraftStatusModule : InteractionModuleBase<SocketInteractionCont
     {
         await DeferAsync(true);
 
-        var message = await Context.Channel.SendMessageAsync("Loading");
+        var message = await Context.Channel.SendMessageAsync("Loading...");
 
-        ((await Context.Client.GetChannelAsync(message.Channel.Id)) as ITextChannel).ModifyMessageAsync(message.Id, properties => properties.Content = "a");
+        var settings = Db.GuildSettings.GetOrCreate(Context.Guild.Id);
+        var observer = new Observer { GuildSetting = settings, ChannelId = Context.Channel.Id, MessageId = message.Id, ServerAddress = address};
+        Db.Observers.Add(observer);
+        Db.SaveChanges();
 
         await FollowupAsync("Observer created!", ephemeral: true);
     }
@@ -33,15 +37,10 @@ public class MinecraftStatusModule : InteractionModuleBase<SocketInteractionCont
     public async Task SetChannel(ITextChannel channel)
     {
         await DeferAsync();
-        var settings = Db.GuildSettings.FirstOrDefault(s => s.GuildId == Context.Guild.Id);
-        if (settings == null)
-        {
-            settings = new GuildSetting {GuildId = Context.Guild.Id};
-            Db.GuildSettings.Add(settings);
-            Db.SaveChanges();
-        }
         
+        var settings = Db.GuildSettings.GetOrCreate(Context.Guild.Id);
         settings.NotificationChannelId = channel.Id;
+        
         Db.SaveChanges();
         
         Logger.LogInformation("Guild {guildName} ({guildId}): Notification channel changed to {channelName}", Context.Guild.Name, Context.Guild.Id, channel.Name);

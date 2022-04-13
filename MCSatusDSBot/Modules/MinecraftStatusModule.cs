@@ -25,8 +25,16 @@ public class MinecraftStatusModule : InteractionModuleBase<SocketInteractionCont
         var message = await Context.Channel.SendMessageAsync("Loading...");
 
         var settings = Db.GuildSettings.GetOrCreate(Context.Guild.Id);
-        var observer = new Observer { GuildSetting = settings, ChannelId = Context.Channel.Id, MessageId = message.Id, ServerAddress = address};
-        Db.Observers.Add(observer);
+        var observer = Db.Observers.GetOrCreate(address);
+
+        Db.ObserversMessages.Add(new ObserverMessage
+        {
+            Observer = observer,
+            ChannelId = Context.Channel.Id,
+            MessageId = message.Id,
+            GuildSetting = settings
+        });
+        
         Db.SaveChanges();
 
         await FollowupAsync("Observer created!", ephemeral: true);

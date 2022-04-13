@@ -10,9 +10,10 @@ using Serilog.Events;
 
 
 Log.Logger = new LoggerConfiguration()
-    .MinimumLevel.Information()
+    .MinimumLevel.Debug()
     .MinimumLevel.Override("Microsoft", LogEventLevel.Error)
-    .WriteTo.Console()
+    .WriteTo.Console(
+        restrictedToMinimumLevel: LogEventLevel.Information)
     .WriteTo.File("log.txt",
         rollingInterval: RollingInterval.Day,
         rollOnFileSizeLimit: true)
@@ -35,7 +36,7 @@ try
             };
 
             config.Token = context.Configuration["Token"];
-            
+
             config.LogFormat = (message, exception) => $"{message.Source}: {message.Message}";
         })
         .UseInteractionService((context, config) =>

@@ -7,6 +7,7 @@ public class ApplicationDbContext: DbContext
 {
     public DbSet<GuildSetting> GuildSettings { get; set; } = null!;
     public DbSet<Observer> Observers { get; set; } = null!;
+    public DbSet<ObserverMessage> ObserversMessages { get; set; } = null!;
     
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {

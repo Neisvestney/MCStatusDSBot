@@ -1,4 +1,4 @@
-#MCSatusDSBot
+# MCSatusDSBot
 **M**ine**c**raft server **status** **d**i**s**cord **bot**
 Created with:
 - .NET 6.0

@@ -1,8 +1,8 @@
 ﻿using System.Linq;
-using MCSatusDSBot.Old.Models;
+using MCStatusDSBot.Old.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace MCSatusDSBot.Extensions;
+namespace MCStatusDSBot.Extensions;
 
 public static class DbSetExtension
 {

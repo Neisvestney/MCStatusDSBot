@@ -2,31 +2,38 @@
 
 #nullable disable
 
-namespace MCSatusDSBot.Migrations
+namespace MCStatusDSBot.Migrations
 {
-    public partial class AddObserversMessages : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Observers_GuildSettings_GuildSettingId",
-                table: "Observers");
+            migrationBuilder.CreateTable(
+                name: "GuildSettings",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    GuildId = table.Column<ulong>(type: "INTEGER", nullable: false),
+                    NotificationChannelId = table.Column<ulong>(type: "INTEGER", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GuildSettings", x => x.Id);
+                });
 
-            migrationBuilder.DropIndex(
-                name: "IX_Observers_GuildSettingId",
-                table: "Observers");
-
-            migrationBuilder.DropColumn(
-                name: "ChannelId",
-                table: "Observers");
-
-            migrationBuilder.DropColumn(
-                name: "GuildSettingId",
-                table: "Observers");
-
-            migrationBuilder.DropColumn(
-                name: "MessageId",
-                table: "Observers");
+            migrationBuilder.CreateTable(
+                name: "Observers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ServerAddress = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Observers", x => x.Id);
+                });
 
             migrationBuilder.CreateTable(
                 name: "ObserversMessages",
@@ -57,6 +64,18 @@ namespace MCSatusDSBot.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_GuildSettings_GuildId",
+                table: "GuildSettings",
+                column: "GuildId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Observers_ServerAddress",
+                table: "Observers",
+                column: "ServerAddress",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ObserversMessages_GuildSettingId",
                 table: "ObserversMessages",
                 column: "GuildSettingId");
@@ -72,39 +91,11 @@ namespace MCSatusDSBot.Migrations
             migrationBuilder.DropTable(
                 name: "ObserversMessages");
 
-            migrationBuilder.AddColumn<ulong>(
-                name: "ChannelId",
-                table: "Observers",
-                type: "INTEGER",
-                nullable: false,
-                defaultValue: 0ul);
+            migrationBuilder.DropTable(
+                name: "GuildSettings");
 
-            migrationBuilder.AddColumn<int>(
-                name: "GuildSettingId",
-                table: "Observers",
-                type: "INTEGER",
-                nullable: false,
-                defaultValue: 0);
-
-            migrationBuilder.AddColumn<ulong>(
-                name: "MessageId",
-                table: "Observers",
-                type: "INTEGER",
-                nullable: false,
-                defaultValue: 0ul);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Observers_GuildSettingId",
-                table: "Observers",
-                column: "GuildSettingId");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Observers_GuildSettings_GuildSettingId",
-                table: "Observers",
-                column: "GuildSettingId",
-                principalTable: "GuildSettings",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+            migrationBuilder.DropTable(
+                name: "Observers");
         }
     }
 }

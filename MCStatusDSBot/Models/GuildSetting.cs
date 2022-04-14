@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace MCSatusDSBot.Old.Models;
+namespace MCStatusDSBot.Old.Models;
 
 [Index(nameof(GuildId), IsUnique = true)]
 public class GuildSetting

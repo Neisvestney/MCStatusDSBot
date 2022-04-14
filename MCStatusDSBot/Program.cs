@@ -2,7 +2,7 @@
 using Discord.Addons.Hosting;
 using Discord.Commands;
 using Discord.WebSocket;
-using MCSatusDSBot;
+using MCStatusDSBot;
 using Microsoft.EntityFrameworkCore;
 using Sample.Serilog;
 using Serilog;

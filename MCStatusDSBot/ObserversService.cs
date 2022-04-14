@@ -7,12 +7,12 @@ using Discord.Addons.Hosting;
 using Discord.Addons.Hosting.Util;
 using Discord.Net;
 using Discord.WebSocket;
-using MCSatusDSBot.Old.Models;
 using MCServerStatus;
 using MCServerStatus.Models;
+using MCStatusDSBot.Old.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace MCSatusDSBot;
+namespace MCStatusDSBot;
 
 public class ObserversService : DiscordClientService
 {

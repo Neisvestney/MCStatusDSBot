@@ -2,10 +2,10 @@
 using Discord;
 using Discord.Interactions;
 using Discord.WebSocket;
-using MCSatusDSBot.Extensions;
-using MCSatusDSBot.Old.Models;
+using MCStatusDSBot.Extensions;
+using MCStatusDSBot.Old.Models;
 
-namespace MCSatusDSBot.Old.Modules;
+namespace MCStatusDSBot.Old.Modules;
 
 [Group("minestatus", "Minecraft server status")]
 public class MinecraftStatusModule : InteractionModuleBase<SocketInteractionContext>

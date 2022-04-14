@@ -1,7 +1,7 @@
-﻿using MCSatusDSBot.Old.Models;
+﻿using MCStatusDSBot.Old.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace MCSatusDSBot;
+namespace MCStatusDSBot;
 
 public class ApplicationDbContext: DbContext
 {

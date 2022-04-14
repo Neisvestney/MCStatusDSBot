@@ -4,7 +4,7 @@
 
 namespace MCStatusDSBot.Migrations
 {
-    public partial class Initial : Migration
+    public partial class AddInitial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -15,7 +15,8 @@ namespace MCStatusDSBot.Migrations
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     GuildId = table.Column<ulong>(type: "INTEGER", nullable: false),
-                    NotificationChannelId = table.Column<ulong>(type: "INTEGER", nullable: true)
+                    NotificationChannelId = table.Column<ulong>(type: "INTEGER", nullable: true),
+                    Locale = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {

@@ -4,10 +4,12 @@ using Discord.Commands;
 using Discord.WebSocket;
 using MCStatusDSBot;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Localization;
 using Sample.Serilog;
 using Serilog;
 using Serilog.Events;
 
+[assembly: RootNamespace("MCStatusDSBot")]
 
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Debug()
@@ -46,6 +48,10 @@ try
         })
         .ConfigureServices((context, services) =>
         {
+            services.AddLocalization(options =>
+            {
+                options.ResourcesPath = "Resources";
+            });
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite("Filename=DataBase.db"));
             services.AddHostedService<InteractionHandler>();
             services.AddHostedService<ObserversService>();

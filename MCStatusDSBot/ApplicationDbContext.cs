@@ -1,5 +1,7 @@
-﻿using MCStatusDSBot.Old.Models;
+﻿using System.Globalization;
+using MCStatusDSBot.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MCStatusDSBot;
 
@@ -11,7 +13,7 @@ public class ApplicationDbContext: DbContext
     
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {
-        Database.EnsureCreated();
+        // Database.EnsureCreated();
     }
         
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -21,6 +23,14 @@ public class ApplicationDbContext: DbContext
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
+        var converter = new ValueConverter<CultureInfo, string>(
+            v => v.ToString(),
+            v => CultureInfo.GetCultureInfo(v));
+
+        builder
+            .Entity<GuildSetting>()
+            .Property(e => e.Locale)
+            .HasConversion(converter);
         base.OnModelCreating(builder);
     }
 }

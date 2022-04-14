@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using MCStatusDSBot.Old.Models;
+using MCStatusDSBot.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace MCStatusDSBot.Extensions;

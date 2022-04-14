@@ -11,15 +11,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MCStatusDSBot.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220414122220_Initial")]
-    partial class Initial
+    [Migration("20220414222037_AddInitial")]
+    partial class AddInitial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.4");
 
-            modelBuilder.Entity("MCStatusDSBot.Old.Models.GuildSetting", b =>
+            modelBuilder.Entity("MCStatusDSBot.Models.GuildSetting", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -27,6 +27,9 @@ namespace MCStatusDSBot.Migrations
 
                     b.Property<ulong>("GuildId")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("Locale")
+                        .HasColumnType("TEXT");
 
                     b.Property<ulong?>("NotificationChannelId")
                         .HasColumnType("INTEGER");
@@ -39,7 +42,7 @@ namespace MCStatusDSBot.Migrations
                     b.ToTable("GuildSettings");
                 });
 
-            modelBuilder.Entity("MCStatusDSBot.Old.Models.Observer", b =>
+            modelBuilder.Entity("MCStatusDSBot.Models.Observer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -57,7 +60,7 @@ namespace MCStatusDSBot.Migrations
                     b.ToTable("Observers");
                 });
 
-            modelBuilder.Entity("MCStatusDSBot.Old.Models.ObserverMessage", b =>
+            modelBuilder.Entity("MCStatusDSBot.Models.ObserverMessage", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -84,15 +87,15 @@ namespace MCStatusDSBot.Migrations
                     b.ToTable("ObserversMessages");
                 });
 
-            modelBuilder.Entity("MCStatusDSBot.Old.Models.ObserverMessage", b =>
+            modelBuilder.Entity("MCStatusDSBot.Models.ObserverMessage", b =>
                 {
-                    b.HasOne("MCStatusDSBot.Old.Models.GuildSetting", "GuildSetting")
+                    b.HasOne("MCStatusDSBot.Models.GuildSetting", "GuildSetting")
                         .WithMany()
                         .HasForeignKey("GuildSettingId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MCStatusDSBot.Old.Models.Observer", "Observer")
+                    b.HasOne("MCStatusDSBot.Models.Observer", "Observer")
                         .WithMany("Messages")
                         .HasForeignKey("ObserverId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -103,7 +106,7 @@ namespace MCStatusDSBot.Migrations
                     b.Navigation("Observer");
                 });
 
-            modelBuilder.Entity("MCStatusDSBot.Old.Models.Observer", b =>
+            modelBuilder.Entity("MCStatusDSBot.Models.Observer", b =>
                 {
                     b.Navigation("Messages");
                 });

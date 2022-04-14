@@ -1,4 +1,4 @@
-﻿namespace MCStatusDSBot.Old.Models;
+﻿namespace MCStatusDSBot.Models;
 
 public class ObserverMessage
 {

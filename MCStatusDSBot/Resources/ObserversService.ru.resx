@@ -1,0 +1,41 @@
+﻿<root>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="ServerStatus" xml:space="preserve">
+        <value>Статус сервера `{0:D}`</value>
+    </data>
+    <data name="LastUpdate" xml:space="preserve">
+        <value>Последнее обновление</value>
+    </data>
+    <data name="Motd" xml:space="preserve">
+        <value>Информация</value>
+    </data>
+    <data name="Online" xml:space="preserve">
+        <value>Онлайн</value>
+    </data>
+    <data name="Players" xml:space="preserve">
+        <value>Игроки</value>
+    </data>
+    <data name="ServerOffline" xml:space="preserve">
+        <value>Сервер выключен</value>
+    </data>
+    <data name="ServerOnline" xml:space="preserve">
+        <value>Сервер онлайн</value>
+    </data>
+    <data name="Version" xml:space="preserve">
+        <value>Версия</value>
+    </data>
+    <data name="NoPlayers" xml:space="preserve">
+        <value>Нет игроков</value>
+    </data>
+</root>

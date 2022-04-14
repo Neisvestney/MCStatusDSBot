@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace MCStatusDSBot.Old.Models;
+namespace MCStatusDSBot.Models;
 
 [Index(nameof(ServerAddress), IsUnique = true)]
 public class Observer

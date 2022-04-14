@@ -25,4 +25,3 @@ This project is kinda practic lesson to learn these things
 ## ToDo
 - Sharding
 - Notifications
-- Localizing

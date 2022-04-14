@@ -1,6 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Globalization;
+using Microsoft.EntityFrameworkCore;
 
-namespace MCStatusDSBot.Old.Models;
+namespace MCStatusDSBot.Models;
 
 [Index(nameof(GuildId), IsUnique = true)]
 public class GuildSetting
@@ -9,4 +10,5 @@ public class GuildSetting
     public ulong GuildId { get; set; }
     
     public ulong? NotificationChannelId { get; set; }
+    public CultureInfo? Locale { get; set; }
 }

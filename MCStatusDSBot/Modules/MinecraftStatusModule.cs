@@ -1,11 +1,12 @@
 ﻿using System.Diagnostics;
+using System.Globalization;
 using Discord;
 using Discord.Interactions;
 using Discord.WebSocket;
 using MCStatusDSBot.Extensions;
-using MCStatusDSBot.Old.Models;
+using MCStatusDSBot.Models;
 
-namespace MCStatusDSBot.Old.Modules;
+namespace MCStatusDSBot.Modules;
 
 [Group("minestatus", "Minecraft server status")]
 public class MinecraftStatusModule : InteractionModuleBase<SocketInteractionContext>
@@ -54,6 +55,28 @@ public class MinecraftStatusModule : InteractionModuleBase<SocketInteractionCont
         Logger.LogInformation("Guild {guildName} ({guildId}): Notification channel changed to {channelName}", Context.Guild.Name, Context.Guild.Id, channel.Name);
 
         await FollowupAsync($"Notification channel changed to {channel.Name}");
+    }
+
+    public enum Locale
+    {
+        En,
+        Ru
+    }
+    
+    [RequireUserPermission(GuildPermission.Administrator)]
+    [SlashCommand("setlocale", "Set language of messages")]
+    public async Task SetChannel(Locale locale)
+    {
+        await DeferAsync();
+        
+        var settings = Db.GuildSettings.GetOrCreate(Context.Guild.Id);
+        settings.Locale = CultureInfo.GetCultureInfo(locale.ToString().ToLower());
+        
+        Db.SaveChanges();
+        
+        Logger.LogInformation("Guild {guildName} ({guildId}): Locale changed to {locale}", Context.Guild.Name, Context.Guild.Id, settings.Locale.Name);
+
+        await FollowupAsync($"Locale changed to {settings.Locale.Name}");
     }
 
     [SlashCommand("test", "Test")]

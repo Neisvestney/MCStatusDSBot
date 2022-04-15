@@ -1,4 +1,6 @@
 # MCStatusDSBot
+[![Build And Test](https://img.shields.io/github/workflow/status/Neisvestney/MCStatusDSBot/Build%20And%20Test?style=flat-square)](https://github.com/Neisvestney/MCStatusDSBot/actions/workflows/buildandtest.yml)
+
 **M**ine**c**raft server **status** **d**i**s**cord **bot**
 Created with:
 - .NET 6.0

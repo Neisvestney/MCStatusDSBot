@@ -1,0 +1,31 @@
+name: Build And Test
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: 6.0.x
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet publish -c Release --os linux --no-restore
+    - name: Execute unit tests
+      run: dotnet test --no-restore
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: MCStatusDSBot.Linux-x64
+        path: MCStatusDSBot\bin\Release\net6.0\linux-x64\publish\
+
